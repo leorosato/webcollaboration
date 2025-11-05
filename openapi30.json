@@ -1,0 +1,1078 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/v1",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Appointments",
+      "description": "Operations related to appointments management"
+    },
+    {
+      "name": "Counselors",
+      "description": "Operations related to counselors and availability"
+    },
+    {
+      "name": "Calendar",
+      "description": "Operations related to calendar and time slots"
+    }
+  ],
+  "paths": {
+    "/calendar/availability": {
+      "post": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Get calendar availability slots",
+        "operationId": "getCalendarAvailability",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalendarAvailabilityRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Available time slots",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailabilitySlot"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointments": {
+      "get": {
+        "tags": [
+          "Appointments"
+        ],
+        "summary": "Get all appointments",
+        "operationId": "getAllAppointments",
+        "parameters": [
+          {
+            "name": "clientEmail",
+            "in": "query",
+            "description": "Filter by client email",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "counselorId",
+            "in": "query",
+            "description": "Filter by counselor ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "Filter appointments from this date",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "Filter appointments to this date",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of appointments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppointmentResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Appointments"
+        ],
+        "summary": "Create a new appointment",
+        "operationId": "createAppointment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppointmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Appointment created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendar/availability": {
+      "post": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Get calendar availability slots",
+        "operationId": "getCalendarAvailability_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalendarAvailabilityRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Available time slots",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailabilitySlot"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/appointments": {
+      "get": {
+        "tags": [
+          "Appointments"
+        ],
+        "summary": "Get all appointments",
+        "operationId": "getAllAppointments_1",
+        "parameters": [
+          {
+            "name": "clientEmail",
+            "in": "query",
+            "description": "Filter by client email",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "counselorId",
+            "in": "query",
+            "description": "Filter by counselor ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "Filter appointments from this date",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "Filter appointments to this date",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of appointments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppointmentResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Appointments"
+        ],
+        "summary": "Create a new appointment",
+        "operationId": "createAppointment_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppointmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Appointment created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/counselors": {
+      "get": {
+        "tags": [
+          "Counselors"
+        ],
+        "summary": "Get all active counselors",
+        "operationId": "getAllCounselors",
+        "parameters": [
+          {
+            "name": "branch",
+            "in": "query",
+            "description": "Filter by branch",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "eventType",
+            "in": "query",
+            "description": "Filter by event type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of counselors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CounselorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/counselors/service-products": {
+      "get": {
+        "tags": [
+          "Counselors"
+        ],
+        "summary": "Get available service products",
+        "operationId": "getServiceProducts",
+        "responses": {
+          "200": {
+            "description": "List of service products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceProductsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calendar/days": {
+      "get": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Get available days",
+        "operationId": "getAvailableDays",
+        "parameters": [
+          {
+            "name": "counselorId",
+            "in": "query",
+            "description": "Filter by counselor ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "branch",
+            "in": "query",
+            "description": "Filter by branch",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "eventType",
+            "in": "query",
+            "description": "Filter by event type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available days",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailableDay"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointments/{appointmentId}": {
+      "get": {
+        "tags": [
+          "Appointments"
+        ],
+        "summary": "Get appointment by ID",
+        "operationId": "getAppointmentById",
+        "parameters": [
+          {
+            "name": "appointmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Appointment details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Appointment not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Appointments"
+        ],
+        "summary": "Cancel an appointment",
+        "operationId": "cancelAppointment",
+        "parameters": [
+          {
+            "name": "appointmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Appointment cancelled successfully"
+          },
+          "404": {
+            "description": "Appointment not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/counselors": {
+      "get": {
+        "tags": [
+          "Counselors"
+        ],
+        "summary": "Get all active counselors",
+        "operationId": "getAllCounselors_1",
+        "parameters": [
+          {
+            "name": "branch",
+            "in": "query",
+            "description": "Filter by branch",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "eventType",
+            "in": "query",
+            "description": "Filter by event type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of counselors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CounselorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/counselors/service-products": {
+      "get": {
+        "tags": [
+          "Counselors"
+        ],
+        "summary": "Get available service products",
+        "operationId": "getServiceProducts_1",
+        "responses": {
+          "200": {
+            "description": "List of service products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceProductsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendar/days": {
+      "get": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Get available days",
+        "operationId": "getAvailableDays_1",
+        "parameters": [
+          {
+            "name": "counselorId",
+            "in": "query",
+            "description": "Filter by counselor ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "branch",
+            "in": "query",
+            "description": "Filter by branch",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "eventType",
+            "in": "query",
+            "description": "Filter by event type",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available days",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailableDay"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/appointments/{appointmentId}": {
+      "get": {
+        "tags": [
+          "Appointments"
+        ],
+        "summary": "Get appointment by ID",
+        "operationId": "getAppointmentById_1",
+        "parameters": [
+          {
+            "name": "appointmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Appointment details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Appointment not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Appointments"
+        ],
+        "summary": "Cancel an appointment",
+        "operationId": "cancelAppointment_1",
+        "parameters": [
+          {
+            "name": "appointmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Appointment cancelled successfully"
+          },
+          "404": {
+            "description": "Appointment not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AvailabilitySlot": {
+        "type": "object",
+        "properties": {
+          "counselorId": {
+            "type": "string",
+            "description": "Counselor identifier"
+          },
+          "counselorName": {
+            "type": "string",
+            "description": "Counselor name"
+          },
+          "date": {
+            "type": "string",
+            "description": "Date of slots",
+            "format": "date"
+          },
+          "slots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TimeSlot"
+            }
+          }
+        }
+      },
+      "TimeSlot": {
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "description": "Slot start time",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "Slot end time",
+            "format": "date-time"
+          },
+          "available": {
+            "type": "boolean",
+            "description": "Whether slot is available"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "description": "Error timestamp",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "integer",
+            "description": "HTTP status code",
+            "format": "int32"
+          },
+          "error": {
+            "type": "string",
+            "description": "Error type"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "path": {
+            "type": "string",
+            "description": "Request path"
+          }
+        }
+      },
+      "CalendarAvailabilityRequest": {
+        "required": [
+          "day"
+        ],
+        "type": "object",
+        "properties": {
+          "counselorOriginalId": {
+            "type": "string",
+            "description": "Original counselor identifier"
+          },
+          "day": {
+            "type": "string",
+            "description": "Day to check availability",
+            "format": "date"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch location"
+          },
+          "eventType": {
+            "type": "string",
+            "description": "Type of event"
+          },
+          "requestVirtualSlots": {
+            "type": "boolean",
+            "description": "Request virtual slots"
+          },
+          "customerType": {
+            "type": "string",
+            "description": "Type of customer"
+          }
+        }
+      },
+      "AppointmentResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Appointment unique identifier"
+          },
+          "clientName": {
+            "type": "string",
+            "description": "Client full name"
+          },
+          "clientEmail": {
+            "type": "string",
+            "description": "Client email"
+          },
+          "clientPhone": {
+            "type": "string",
+            "description": "Client phone number"
+          },
+          "counselor": {
+            "$ref": "#/components/schemas/CounselorResponse"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Appointment start time",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "Appointment end time",
+            "format": "date-time"
+          },
+          "eventType": {
+            "type": "string",
+            "description": "Type of event"
+          },
+          "status": {
+            "type": "string",
+            "description": "Appointment status",
+            "enum": [
+              "PENDING",
+              "CONFIRMED",
+              "CANCELLED",
+              "COMPLETED"
+            ]
+          },
+          "graphEventId": {
+            "type": "string",
+            "description": "Microsoft Graph event ID"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Creation timestamp",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp",
+            "format": "date-time"
+          }
+        }
+      },
+      "CounselorResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Counselor unique identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Counselor full name"
+          },
+          "email": {
+            "type": "string",
+            "description": "Counselor email"
+          },
+          "idServiceProduct": {
+            "type": "string",
+            "description": "Service/Product identifier"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch location"
+          },
+          "eventType": {
+            "type": "string",
+            "description": "Type of events handled"
+          },
+          "statusActive": {
+            "type": "boolean",
+            "description": "Whether counselor is active"
+          }
+        }
+      },
+      "CreateAppointmentRequest": {
+        "required": [
+          "clientName",
+          "email",
+          "endTime",
+          "startTime"
+        ],
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "description": "Appointment start time",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "Appointment end time",
+            "format": "date-time"
+          },
+          "clientName": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string",
+            "description": "Client full name"
+          },
+          "email": {
+            "type": "string",
+            "description": "Client email address",
+            "format": "email"
+          },
+          "ndc": {
+            "type": "string",
+            "description": "Phone number with country code"
+          },
+          "idServiceProduct": {
+            "type": "string",
+            "description": "Service/Product identifier"
+          },
+          "note": {
+            "type": "string",
+            "description": "General notes"
+          },
+          "customerNote": {
+            "type": "string",
+            "description": "Customer notes"
+          },
+          "kind": {
+            "type": "string",
+            "description": "Kind of appointment"
+          },
+          "userType": {
+            "type": "string",
+            "description": "Type of user"
+          },
+          "counselorIdCC": {
+            "type": "string",
+            "description": "Counselor identifier from CC system"
+          },
+          "branch": {
+            "type": "string",
+            "description": "Branch location"
+          },
+          "eventType": {
+            "type": "string",
+            "description": "Type of event"
+          },
+          "requestVirtualSlots": {
+            "type": "boolean",
+            "description": "Request virtual slots"
+          },
+          "customerType": {
+            "type": "string",
+            "description": "Type of customer"
+          },
+          "invalidita": {
+            "type": "string",
+            "description": "Disability information"
+          },
+          "cliente": {
+            "type": "string",
+            "description": "Client identifier"
+          },
+          "argomento": {
+            "type": "string",
+            "description": "Appointment subject"
+          },
+          "data": {
+            "type": "string",
+            "description": "Date information"
+          },
+          "slot": {
+            "type": "string",
+            "description": "Time slot"
+          },
+          "flagPrenotazione": {
+            "type": "string",
+            "description": "Booking flag"
+          },
+          "noteConsulente": {
+            "type": "string",
+            "description": "Counselor notes"
+          },
+          "noteCliente": {
+            "type": "string",
+            "description": "Client notes"
+          }
+        }
+      },
+      "ServiceProduct": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Product ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Product name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Product description"
+          }
+        }
+      },
+      "ServiceProductsResponse": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceProduct"
+            }
+          }
+        }
+      },
+      "AvailableDay": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Available date",
+            "format": "date"
+          },
+          "slotsCount": {
+            "type": "integer",
+            "description": "Number of available slots",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  }
+}
